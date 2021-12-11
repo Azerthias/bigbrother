@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 import fr.smb.bigbrother.R;
 
 public class Foyer extends AppCompatActivity {
@@ -25,18 +27,17 @@ public class Foyer extends AppCompatActivity {
         setContentView(R.layout.foyer);
 
         ActionBar actionBar = getSupportActionBar();
+        Calendar calendar = Calendar.getInstance();
+        String[] jours = {"lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"};
+        String jour = jours [calendar.get(Calendar.DAY_OF_WEEK)-2];
+
         if (actionBar != null) {
-            actionBar.setTitle("Planning Foyer");
+            actionBar.setTitle("" + jour);
         }
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         LinearLayout ll = findViewById(R.id.ll);
 
-       TextView tv = new TextView(this);
-        tv.setHeight(100);
-tv.setText("Mardi");
-
-        ll.addView(tv);
 
         //myRef.setValue("Hello, World!");
         for(int i = 0; i < 8; i++) {
