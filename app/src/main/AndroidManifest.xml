@@ -23,7 +23,8 @@
 
         <activity android:name=".Menu"/>
 
-        <activity android:name=".Foyer"/>
+        <activity android:name=".foyer.Foyer"/>
+        <activity android:name=".foyer.Demande"/>
 
     </application>
 
