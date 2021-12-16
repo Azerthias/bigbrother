@@ -4,3 +4,15 @@ Here are all the useful things for noobs:
 implementation platform('com.google.firebase:firebase-bom:29.0.1')
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-database:20.0.3'
+
+
+FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+        myRef.setValue("Hello, World!");
+
+        SharedPreferences preferences = getSharedPreferences("prefData", Context.MODE_PRIVATE);
+                if(!preferences.getBoolean("logged",false)){
+                    Intent i = new Intent(MainActivity.this, First.class);
+                    startActivity(i);
+                }
