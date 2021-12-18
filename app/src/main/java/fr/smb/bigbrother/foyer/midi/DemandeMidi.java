@@ -25,11 +25,13 @@ public class DemandeMidi extends AppCompatActivity {
         int j = intent.getIntExtra("j", 0);
 
         TextView tv = findViewById(R.id.tvDemande);
-        Reader.readOnTv("foyer/midi/semaines/semaine33/" + Util.jours[j] + "/" + h + "h/places",tv,"Demander à manger foyer " + Util.jours[j] + " de " + h + "h à " + (h + 1) + "h\nIl reste &data& places");
+        final String path = Util.dayPath(j, h) + "/places";
+        final String text = "Demander à manger foyer " + Util.jours[j] + " de " + h + "h à " + (h + 1) + "h\nIl reste &data& places";
+        Reader.readOnTv(path,tv,text);
 
         Button b = findViewById(R.id.bDemande);
         b.setOnClickListener(v -> {
-            Database.write("foyer/midi/semaines/semaine" + 33 + "/" + Util.jours[j] + "/" + h + "h/demandes/" + Cache.getCard(), Cache.getName());
+            Database.write(Util.dayPath(j, h)+ "/demandes/" + Cache.getCard(), Cache.getName());
             finish();
         });
 

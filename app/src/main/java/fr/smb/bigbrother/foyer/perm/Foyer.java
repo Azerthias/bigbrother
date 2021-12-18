@@ -1,4 +1,4 @@
-package fr.smb.bigbrother.foyer;
+package fr.smb.bigbrother.foyer.perm;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,9 +19,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Calendar;
 
-import fr.smb.bigbrother.MainActivity;
-import fr.smb.bigbrother.Menu;
 import fr.smb.bigbrother.R;
+import fr.smb.bigbrother.util.Util;
 
 
 public class Foyer extends AppCompatActivity {
@@ -31,14 +30,7 @@ public class Foyer extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.foyer);
 
-        ActionBar actionBar = getSupportActionBar();
-        Calendar calendar = Calendar.getInstance();
-        String[] jours = {"lundi","mardi","mercredi","jeudi","vendredi","samedi","dimanche"};
-        String jour = jours [calendar.get(Calendar.DAY_OF_WEEK)-2];
-
-        if (actionBar != null) {
-            actionBar.setTitle("" + jour);
-        }
+        Util.setTitle(this,Util.getDay());
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         LinearLayout ll = findViewById(R.id.ll);

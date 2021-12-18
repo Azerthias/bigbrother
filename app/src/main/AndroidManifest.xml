@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Firebase">
         <activity
-            android:name=".Start"
+            android:name=".annexe.Start"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +23,12 @@
 
         <activity android:name=".Menu"/>
         <activity android:name=".MainActivity"/>
-        <activity android:name=".foyer.Foyer"/>
-        <activity android:name=".foyer.Demande"/>
+        <activity android:name=".foyer.perm.Foyer"/>
+        <activity android:name=".foyer.perm.Demande"/>
         <activity android:name=".foyer.midi.Midi"/>
         <activity android:name=".foyer.midi.DemandeMidi"/>
-        <activity android:name=".First"/>
-        <activity android:name=".Maj"/>
+        <activity android:name=".annexe.First"/>
+        <activity android:name=".annexe.Maj"/>
 
     </application>
 

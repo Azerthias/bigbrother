@@ -1,4 +1,4 @@
-package fr.smb.bigbrother;
+package fr.smb.bigbrother.annexe;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 
+import fr.smb.bigbrother.MainActivity;
 import fr.smb.bigbrother.util.Cache;
 import fr.smb.bigbrother.util.Util;
 import fr.smb.bigbrother.util.database.Database;

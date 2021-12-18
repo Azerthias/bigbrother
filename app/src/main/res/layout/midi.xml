@@ -18,17 +18,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:text="11h - 12h"
             android:textAlignment="center"
-            android:textSize="20dp"
-            android:text="11h - 12h" />
+            android:textSize="25sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0.5"
+            android:text="12h - 13h"
             android:textAlignment="center"
-            android:textSize="20dp"
-            android:text="12h - 13h" />
+            android:textSize="25sp" />
 
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package fr.smb.bigbrother;
+package fr.smb.bigbrother.annexe;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import fr.smb.bigbrother.MainActivity;
+import fr.smb.bigbrother.R;
 
 public class First extends AppCompatActivity {
     @Override

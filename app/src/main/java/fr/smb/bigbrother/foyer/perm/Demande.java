@@ -1,4 +1,4 @@
-package fr.smb.bigbrother.foyer;
+package fr.smb.bigbrother.foyer.perm;
 
 import android.content.Intent;
 import android.os.Bundle;

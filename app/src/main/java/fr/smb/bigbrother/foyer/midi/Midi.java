@@ -1,6 +1,7 @@
 package fr.smb.bigbrother.foyer.midi;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -35,43 +36,40 @@ public class Midi  extends AppCompatActivity {
 
             if(i == 2){i++;}
             final int jour = i;
+
             LinearLayout ll2 = new LinearLayout(this);
             ll2.setOrientation(LinearLayout.HORIZONTAL);
             ll2.setWeightSum(1);
             ll2.setLayoutParams(param);
+            if(Util.getDayNumber() == i){
+                ll2.setBackgroundColor(Color.BLUE);
+            }
 
             TextView tv = new TextView(this);
             tv.setText(Util.jours[i]);
             tv.setWidth(200);
-
-            Button b = new Button(this);
-            b.setLayoutParams(param);
-
-
-
-            final String path = "foyer/midi/semaines/semaine33/" + Util.jours[i] + "/" + 11 + "h/places";
-            Reader.readOnTv(path,b,getString(R.string.texteBoutonFoyerMidi));
-
-            b.setOnClickListener(v -> {
-                Intent intent = new Intent(Midi.this, DemandeMidi.class);
-                intent.putExtra("h", 11);
-                intent.putExtra("j", jour);
-                startActivity(intent);
-            });
-
-            Button b2 = new Button(this);
-            b2.setLayoutParams(param);
-
-            b2.setOnClickListener(v -> {
-                Intent intent = new Intent(Midi.this, DemandeMidi.class);
-                intent.putExtra("h", 12);
-                intent.putExtra("j", jour);
-                startActivity(intent);
-            });
-
             ll2.addView(tv);
-            ll2.addView(b);
-            ll2.addView(b2);
+
+            for(int h = 11; h <= 12; h++){
+
+                final int heure = h;
+                final String path = Util.dayPath(jour, heure) + "/places";
+                final String text = getString(R.string.texteBoutonFoyerMidi);
+
+                Button b = new Button(this);
+                b.setLayoutParams(param);
+                b.setOnClickListener(v -> {
+                    Intent intent = new Intent(Midi.this, DemandeMidi.class);
+                    intent.putExtra("h", heure);
+                    intent.putExtra("j", jour);
+                    startActivity(intent);
+                });
+
+                Reader.readOnTv(path, b, text);
+
+                ll2.addView(b);
+            }
+
             ll.addView(ll2);
         }
 
