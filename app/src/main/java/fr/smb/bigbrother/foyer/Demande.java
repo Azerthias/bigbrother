@@ -10,7 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import fr.smb.bigbrother.R;
-import fr.smb.bigbrother.Util;
+import fr.smb.bigbrother.util.Util;
+import fr.smb.bigbrother.util.database.Database;
 
 public class Demande extends AppCompatActivity {
 
@@ -29,7 +30,7 @@ public class Demande extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Util.write("B" + h,"TC");
+                Database.write("B" + h,"TC");
                 finish();
             }
         });

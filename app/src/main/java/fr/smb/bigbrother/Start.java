@@ -11,6 +11,10 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
 
+import fr.smb.bigbrother.util.Cache;
+import fr.smb.bigbrother.util.Util;
+import fr.smb.bigbrother.util.database.Database;
+
 public class Start extends AppCompatActivity {
 
     final static String version = "beta";
@@ -23,14 +27,14 @@ public class Start extends AppCompatActivity {
 
         Util.init(this);
 
-        Util.getDatabase().getReference("version").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
+        Database.getReference("version").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 String s = task.getResult().getValue(String.class);
                 Log.println(Log.ASSERT, "g", "" + s);
                 Intent i;
                 if(s.equals(version)){
-                    if(!Util.isLogged() || forceLoggin){
+                    if(!Cache.isLogged() || forceLoggin){
                         i = new Intent(Start.this, First.class);
                     }else {
                         i = new Intent(Start.this, MainActivity.class);

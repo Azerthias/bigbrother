@@ -16,3 +16,46 @@ FirebaseDatabase database = FirebaseDatabase.getInstance();
                     Intent i = new Intent(MainActivity.this, First.class);
                     startActivity(i);
                 }
+
+
+
+
+public static String read(String ref){
+
+
+
+
+
+        return s;
+
+
+               /* .addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+                /*.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                s = dataSnapshot.getValue(String.class);
+                Log.println(Log.ASSERT,"value",s);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w("TAG", "Failed to read value.", error.toException());
+            }
+        });*/
+        //return s;
+    }

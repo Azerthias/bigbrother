@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Foyer</string>
+    <string name="texteBoutonFoyerMidi"><![CDATA[il reste &data& places]]></string>
 </resources>

@@ -2,24 +2,15 @@ package fr.smb.bigbrother.foyer.midi;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.ValueEventListener;
-
 import fr.smb.bigbrother.R;
-import fr.smb.bigbrother.Util;
+import fr.smb.bigbrother.util.Util;
+import fr.smb.bigbrother.util.database.Reader;
 
 public class Midi  extends AppCompatActivity {
 
@@ -29,8 +20,7 @@ public class Midi  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.midi);
 
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("Manger au Foyer");
+        Util.setTitle(this,"Manger au Foyer");
 
 
         LinearLayout ll = findViewById(R.id.llFoyerMidi);
@@ -56,7 +46,11 @@ public class Midi  extends AppCompatActivity {
 
             Button b = new Button(this);
             b.setLayoutParams(param);
-            bouton(b,Util.jours[i] + " : 11h - 12h");
+
+
+
+            final String path = "foyer/midi/semaines/semaine33/" + Util.jours[i] + "/" + 11 + "h/places";
+            Reader.readOnTv(path,b,getString(R.string.texteBoutonFoyerMidi));
 
             b.setOnClickListener(v -> {
                 Intent intent = new Intent(Midi.this, DemandeMidi.class);
@@ -67,16 +61,12 @@ public class Midi  extends AppCompatActivity {
 
             Button b2 = new Button(this);
             b2.setLayoutParams(param);
-            bouton(b2,Util.jours[i] + " : 12h - 13h");
 
-            b2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(Midi.this, DemandeMidi.class);
-                    intent.putExtra("h", 12);
-                    intent.putExtra("j", jour);
-                    startActivity(intent);
-                }
+            b2.setOnClickListener(v -> {
+                Intent intent = new Intent(Midi.this, DemandeMidi.class);
+                intent.putExtra("h", 12);
+                intent.putExtra("j", jour);
+                startActivity(intent);
             });
 
             ll2.addView(tv);
@@ -87,25 +77,5 @@ public class Midi  extends AppCompatActivity {
 
     }
 
-    public static void bouton(Button b,String id){
 
-        try {
-            Util.getDatabase().getReference("foyer").child("midi").child("places").child(id).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    // This method is called once with the initial value and again
-                    // whenever data at this location is updated.
-                    b.setText(dataSnapshot.getValue(String.class));
-                }
-
-                @Override
-                public void onCancelled(DatabaseError error) {
-                    // Failed to read value
-                    Log.w("TAG", "Failed to read value.", error.toException());
-                }
-            });
-        }catch(Exception e){
-
-        }
-    }
 }
