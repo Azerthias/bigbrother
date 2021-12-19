@@ -19,9 +19,7 @@ public class contain {
         Database.getReference(path).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
                 if(snapshot.getKey().hashCode() == value.hashCode()){
-                    Util.print("validation");
                     out.updateBoolean(key, true);
                     r.update();
                 }
@@ -36,7 +34,6 @@ public class contain {
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 if(snapshot.getKey().hashCode() == value.hashCode()){
-                    Util.print("validation");
                     out.updateBoolean(key, false);
                     r.update();
                 }

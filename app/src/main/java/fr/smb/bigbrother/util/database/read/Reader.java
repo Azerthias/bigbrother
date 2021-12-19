@@ -7,12 +7,16 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 import fr.smb.bigbrother.util.database.Database;
 import fr.smb.bigbrother.util.database.read.type.contain;
 import fr.smb.bigbrother.util.database.read.type.count;
 import fr.smb.bigbrother.util.database.read.type.value;
 
 public class Reader {
+
+    static ArrayList<Reader> list = new ArrayList<Reader>();
 
     private DatabaseEvent dataEvent;
 
@@ -41,11 +45,19 @@ public class Reader {
 
     public void setEvent(DatabaseEvent de){
         dataEvent = de;
+        list.add(this);
         update();
     }
 
-    public void update(){
+    public void repeater(){
         dataEvent.event(out);
+    }
+
+    public void update(){
+        for(Reader r : list ){
+            r.repeater();
+        }
+        //dataEvent.event(out);
     }
 
     public static void readOnTv(String path, TextView tv, String text){
@@ -55,11 +67,11 @@ public class Reader {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String[] split = text.split("&data&");
-                String end = split[0];
+                StringBuilder end = new StringBuilder(split[0]);
                 for(int i = 1; i < split.length;i++){
-                    end = end + dataSnapshot.getValue() + split[i];
+                    end.append(dataSnapshot.getValue()).append(split[i]);
                 }
-                tv.setText(end);
+                tv.setText(end.toString());
             }
 
             @Override
@@ -70,22 +82,6 @@ public class Reader {
 
     }
 
-    /*public Reader(String path){
-
-
-        Database.getReference(path).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                value = dataSnapshot.getValue();
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.w("TAG", "Failed to read value.", error.toException());
-            }
-        });
-    }*/
 
 
 

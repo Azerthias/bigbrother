@@ -9,12 +9,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
 import fr.smb.bigbrother.R;
 import fr.smb.bigbrother.util.Cache;
 import fr.smb.bigbrother.util.Util;
 import fr.smb.bigbrother.util.database.read.Reader;
 
 public class Midi  extends AppCompatActivity {
+
+    static boolean inscrit[][] = new boolean[4][2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +37,15 @@ public class Midi  extends AppCompatActivity {
         param.weight = 0.5f;
         param.setMargins(10,10,10,10);
 
+
+
         for(int i = 0; i < 5; i++) {
 
 
             if(i == 2){i++;}
             final int jour = i;
+            final int jv = jour>2?jour-1:jour;
+            Util.print("jv : " + jv);
 
             LinearLayout ll2 = new LinearLayout(this);
             ll2.setOrientation(LinearLayout.HORIZONTAL);
@@ -52,11 +60,15 @@ public class Midi  extends AppCompatActivity {
             tv.setWidth(200);
             ll2.addView(tv);
 
+
+
             for(int h = 11; h <= 12; h++){
 
+
+
                 final int heure = h;
+                final int hv = heure - 11;
                 final String path = Util.dayPath(jour, heure);
-                //final String text = getString(R.string.texteBoutonFoyerMidi);
 
                 Button b = new Button(this);
                 b.setLayoutParams(param);
@@ -70,22 +82,28 @@ public class Midi  extends AppCompatActivity {
                     boolean contain = out.getBoolean("contain");
                     b.setText(text);
                     if(contain){
+                        inscrit[jv][hv] = true;
                         b.setBackgroundColor(Color.GREEN);
-                    }else if(nbPlaces <= 0){
+                    }else{
+                        inscrit[jv][hv] = false;
+                        if(nbPlaces <= 0){
                         b.setBackgroundColor(Color.RED);
                     }else if(nbPlaces <= 10){
                         b.setBackgroundColor(Color.YELLOW);
                     }else{
                         b.setBackgroundColor(Color.BLUE);
                     }
+                    }
 
-                    if(contain || nbPlaces <= 0){
+                    if(contain){
                         b.setOnClickListener(v -> {
                             Intent intent = new Intent(Midi.this, RemoveMidi.class);
                             intent.putExtra("h", heure);
                             intent.putExtra("j", jour);
                             startActivity(intent);
                         });
+                    }else if(nbPlaces <= 0 || nbInscription() >= 2){
+                        b.setOnClickListener(null);
                     }else{
                         b.setOnClickListener(v -> {
                             Intent intent = new Intent(Midi.this, DemandeMidi.class);
@@ -107,6 +125,20 @@ public class Midi  extends AppCompatActivity {
             ll.addView(ll2);
         }
 
+    }
+
+    private static int nbInscription(){
+        int nb = 0;
+        for(boolean[] b : inscrit){
+            for(boolean b2 : b){
+                if(b2){
+                    nb++;
+                }
+            }
+        }
+        Util.print("nb : " + nb);
+        Util.print("tab : " + Arrays.deepToString(inscrit));
+        return nb;
     }
 
 
