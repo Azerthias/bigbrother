@@ -9,8 +9,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Arrays;
-
 import fr.smb.bigbrother.R;
 import fr.smb.bigbrother.util.Cache;
 import fr.smb.bigbrother.util.Util;
@@ -18,7 +16,7 @@ import fr.smb.bigbrother.util.database.read.Reader;
 
 public class Midi  extends AppCompatActivity {
 
-    static boolean inscrit[][] = new boolean[4][2];
+    static boolean[][] inscrit = new boolean[4][2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

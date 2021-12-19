@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.database.FirebaseDatabase;
-
 public class Cache {
     static SharedPreferences preferences;
     static AppCompatActivity app;

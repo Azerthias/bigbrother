@@ -1,13 +1,5 @@
 package fr.smb.bigbrother.util.database;
 
-import android.content.Context;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -67,7 +59,7 @@ public class Database {
 
 
         String[] s = path.split("/");
-        Map<String, Object> updates = new HashMap<String,Object>();
+        Map<String, Object> updates = new HashMap<>();
         updates.put(s[s.length-1], data);
         getReference(path).getParent().updateChildren(updates);
 
@@ -77,9 +69,6 @@ public class Database {
         getReference(path).removeValue();
     }
 
-
-
-    static String s = null;
 
     public static FirebaseDatabase getDatabase(){
         update();
