@@ -47,6 +47,11 @@ public class Util {
         return j;
     }
 
+    public static String getTime(){
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.HOUR) + ":" + calendar.get(Calendar.MINUTE) + ":" +calendar.get(Calendar.SECOND);
+    }
+
     public static String getDay(){
 
         return jours[getDayNumber()];
