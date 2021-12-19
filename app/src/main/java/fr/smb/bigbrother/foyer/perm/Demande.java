@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import fr.smb.bigbrother.R;
-import fr.smb.bigbrother.util.Util;
 import fr.smb.bigbrother.util.database.Database;
 
 public class Demande extends AppCompatActivity {
@@ -18,7 +17,7 @@ public class Demande extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.foyer_demande);
+        setContentView(R.layout.demande);
 
         Intent intent = getIntent();
         int h = intent.getIntExtra("h",0);
@@ -26,7 +25,7 @@ public class Demande extends AppCompatActivity {
         TextView tv = findViewById(R.id.tvDemande);
         tv.setText("Demander à aller au foyer de " + (h+8) + "h à " + (h+9) +"h");
 
-        Button b = findViewById(R.id.bDemande);
+        Button b = findViewById(R.id.bOui);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -35,7 +34,7 @@ public class Demande extends AppCompatActivity {
             }
         });
 
-        Button bRetour = findViewById(R.id.bRetour);
+        Button bRetour = findViewById(R.id.bNon);
         bRetour.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

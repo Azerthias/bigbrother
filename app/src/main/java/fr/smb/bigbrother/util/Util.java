@@ -35,12 +35,16 @@ public class Util {
 
     public static int getWeekNumber(){
         Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.WEEK_OF_YEAR);
+        return calendar.get(Calendar.WEEK_OF_YEAR) - 2;
     }
 
     public static int getDayNumber(){
         Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.DAY_OF_WEEK)-2;
+        int j = calendar.get(Calendar.DAY_OF_WEEK)-2;
+        if(j < 0){
+            j = 6;
+        }
+        return j;
     }
 
     public static String getDay(){

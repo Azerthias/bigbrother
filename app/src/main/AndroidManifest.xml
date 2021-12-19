@@ -27,6 +27,7 @@
         <activity android:name=".foyer.perm.Demande"/>
         <activity android:name=".foyer.midi.Midi"/>
         <activity android:name=".foyer.midi.DemandeMidi"/>
+        <activity android:name=".foyer.midi.RemoveMidi"/>
         <activity android:name=".annexe.First"/>
         <activity android:name=".annexe.Maj"/>
 

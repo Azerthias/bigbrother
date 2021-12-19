@@ -2,6 +2,12 @@ package fr.smb.bigbrother.util.database;
 
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -66,6 +72,12 @@ public class Database {
         getReference(path).getParent().updateChildren(updates);
 
     }
+
+    public static void remove(String path){
+        getReference(path).removeValue();
+    }
+
+
 
     static String s = null;
 

@@ -13,7 +13,7 @@ import fr.smb.bigbrother.util.Util;
 import fr.smb.bigbrother.util.database.Database;
 import fr.smb.bigbrother.util.database.read.Reader;
 
-public class DemandeMidi extends AppCompatActivity {
+public class RemoveMidi extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,24 +25,13 @@ public class DemandeMidi extends AppCompatActivity {
         int j = intent.getIntExtra("j", 0);
 
         TextView tv = findViewById(R.id.tvDemande);
-        final String path = Util.dayPath(j, h);
-
-        Reader r = new Reader();
-        r.setEvent(out -> {
-            int maxPlaces = out.getInt("value");
-            int nbPlaces = maxPlaces - out.getInt("count");
-            String text = "Manger foyer " + Util.jours[j] + " de " + h + "h à " + (h + 1) + "h\nIl reste " + nbPlaces + " places sur " + maxPlaces;
-            tv.setText(text);
-
-
-
-        });
-        r.addValue(path + "/places","value");
-        r.addCount(path + "/demandes","count");
+        final String path = Util.dayPath(j, h) + "/places";
+        final String text = "Retirer manger au foyer " + Util.jours[j] + " de " + h + "h à " + (h + 1) + "h";
+        Reader.readOnTv(path,tv,text);
 
         Button b = findViewById(R.id.bOui);
         b.setOnClickListener(v -> {
-            Database.write(Util.dayPath(j, h)+ "/demandes/" + Cache.getCard(), Cache.getName());
+            Database.remove(Util.dayPath(j, h)+ "/demandes/" + Cache.getCard());
             finish();
         });
 

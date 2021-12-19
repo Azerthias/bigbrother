@@ -10,8 +10,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import fr.smb.bigbrother.R;
+import fr.smb.bigbrother.util.Cache;
 import fr.smb.bigbrother.util.Util;
-import fr.smb.bigbrother.util.database.Reader;
+import fr.smb.bigbrother.util.database.read.Reader;
 
 public class Midi  extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class Midi  extends AppCompatActivity {
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         param.weight = 0.5f;
+        param.setMargins(10,10,10,10);
 
         for(int i = 0; i < 5; i++) {
 
@@ -53,19 +55,51 @@ public class Midi  extends AppCompatActivity {
             for(int h = 11; h <= 12; h++){
 
                 final int heure = h;
-                final String path = Util.dayPath(jour, heure) + "/places";
-                final String text = getString(R.string.texteBoutonFoyerMidi);
+                final String path = Util.dayPath(jour, heure);
+                //final String text = getString(R.string.texteBoutonFoyerMidi);
 
                 Button b = new Button(this);
                 b.setLayoutParams(param);
-                b.setOnClickListener(v -> {
-                    Intent intent = new Intent(Midi.this, DemandeMidi.class);
-                    intent.putExtra("h", heure);
-                    intent.putExtra("j", jour);
-                    startActivity(intent);
-                });
+                b.setTextSize(20);
 
-                Reader.readOnTv(path, b, text);
+                Reader r = new Reader();
+                r.setEvent(out -> {
+                    int maxPlaces = out.getInt("value");
+                    int nbPlaces = maxPlaces - out.getInt("count");
+                    String text = "il reste " + nbPlaces + " places sur " + maxPlaces;
+                    boolean contain = out.getBoolean("contain");
+                    b.setText(text);
+                    if(contain){
+                        b.setBackgroundColor(Color.GREEN);
+                    }else if(nbPlaces <= 0){
+                        b.setBackgroundColor(Color.RED);
+                    }else if(nbPlaces <= 10){
+                        b.setBackgroundColor(Color.YELLOW);
+                    }else{
+                        b.setBackgroundColor(Color.BLUE);
+                    }
+
+                    if(contain || nbPlaces <= 0){
+                        b.setOnClickListener(v -> {
+                            Intent intent = new Intent(Midi.this, RemoveMidi.class);
+                            intent.putExtra("h", heure);
+                            intent.putExtra("j", jour);
+                            startActivity(intent);
+                        });
+                    }else{
+                        b.setOnClickListener(v -> {
+                            Intent intent = new Intent(Midi.this, DemandeMidi.class);
+                            intent.putExtra("h", heure);
+                            intent.putExtra("j", jour);
+                            startActivity(intent);
+                        });
+                    }
+
+
+                });
+                r.addValue(path + "/places","value");
+                r.addCount(path + "/demandes","count");
+                r.addTest(path + "/demandes","contain" , "" + Cache.getCard());
 
                 ll2.addView(b);
             }
