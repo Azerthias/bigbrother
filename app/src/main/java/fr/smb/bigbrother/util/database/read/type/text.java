@@ -12,7 +12,7 @@ import fr.smb.bigbrother.util.database.read.Reader;
 import fr.smb.bigbrother.util.database.read.out;
 
 public class text {
-    public text(String path, String key, out out, Reader r){
+    /*public text(String path, String key, out out, Reader r){
         Util.print(path);
         out.addString(key,null);
         Database.getReference(path).addValueEventListener(new ValueEventListener() {
@@ -29,5 +29,5 @@ public class text {
                 Log.w("TAG", "Failed to read value.", error.toException());
             }
         });
-    }
+    }*/
 }

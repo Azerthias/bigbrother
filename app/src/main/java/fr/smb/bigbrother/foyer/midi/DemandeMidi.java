@@ -37,7 +37,7 @@ public class DemandeMidi extends AppCompatActivity {
 
 
         });
-        r.addValue(path + "/places","value");
+        r.addIntValue(path + "/places","value");
         r.addCount(path + "/demandes","count");
 
         Button b = findViewById(R.id.bOui);

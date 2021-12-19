@@ -9,7 +9,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import fr.smb.bigbrother.R;
 import fr.smb.bigbrother.util.Util;
@@ -36,7 +38,10 @@ public class Pass extends AppCompatActivity {
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
                 handler.postDelayed(runnable, delay);
-                tv.setText(Util.getTime());
+                Date dt = new Date();
+                SimpleDateFormat dateFormat;
+                dateFormat = new SimpleDateFormat("dd/MM\nkk:mm:ss");
+                tv.setText(dateFormat.format(dt));
             }
         }, delay);
 

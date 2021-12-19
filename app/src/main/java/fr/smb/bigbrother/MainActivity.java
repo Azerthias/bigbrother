@@ -21,8 +21,6 @@ public class MainActivity extends AppCompatActivity {
 
         Util.setTitle(this,"Big brother");
 
-
-
         Button b = findViewById(R.id.bMenu);
         b.setOnClickListener(v -> {
             Intent i = new Intent(MainActivity.this, Menu.class);
