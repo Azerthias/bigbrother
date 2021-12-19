@@ -32,6 +32,11 @@ public class Midi  extends AppCompatActivity {
 
         LinearLayout ll = findViewById(R.id.llFoyerMidi);
 
+        Button pass = findViewById(R.id.bPass);
+        pass.setOnClickListener(v -> {
+            Intent i = new Intent(Midi.this, Pass.class);
+            startActivity(i);
+        });
 
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
@@ -111,14 +116,10 @@ public class Midi  extends AppCompatActivity {
 
 
                     }else if (nbPlaces <=0){
-                        b.setOnClickListener(v -> {
-                            Toast.makeText(getApplicationContext(),"Crénau plein",Toast.LENGTH_SHORT).show();
-                        });
+                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Crénau plein",Toast.LENGTH_SHORT).show());
 
                     }else if(nbInscription() >= 1) {
-                        b.setOnClickListener(v -> {
-                            Toast.makeText(getApplicationContext(),"Tu es déjà inscrit cette semaine",Toast.LENGTH_SHORT).show();
-                        });
+                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Tu es déjà inscrit cette semaine",Toast.LENGTH_SHORT).show());
 
 
 
@@ -141,7 +142,8 @@ public class Midi  extends AppCompatActivity {
                 ll2.addView(b);
             }
 
-            ll.addView(ll2);
+
+            ll.addView(ll2,ll.getChildCount() - 1);
         }
 
     }
