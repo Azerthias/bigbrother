@@ -3,9 +3,12 @@ package fr.smb.bigbrother.foyer.midi;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.style.BackgroundColorSpan;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -81,16 +84,19 @@ public class Midi  extends AppCompatActivity {
                     b.setText(text);
                     if(contain){
                         inscrit[jv][hv] = true;
-                        b.setBackgroundColor(Color.GREEN);
+                        SpannableString str = new SpannableString("inscrit\n\n"+text);
+                        str.setSpan(new BackgroundColorSpan(Color.RED), 0, 7, 0);
+                        b.setText(str);
+
                     }else{
                         inscrit[jv][hv] = false;
                         if(nbPlaces <= 0){
-                        b.setBackgroundColor(Color.RED);
-                    }else if(nbPlaces <= 10){
-                        b.setBackgroundColor(Color.YELLOW);
-                    }else{
-                        b.setBackgroundColor(Color.BLUE);
-                    }
+                            b.setBackgroundColor(Color.RED);
+                        }else if(nbPlaces <= 10){
+                            b.setBackgroundColor(Color.parseColor("#ff9900"));
+                        }else{
+                            b.setBackgroundColor(Color.parseColor("#33cc33"));
+                        }
                     }
 
                     if(contain){
@@ -100,8 +106,21 @@ public class Midi  extends AppCompatActivity {
                             intent.putExtra("j", jour);
                             startActivity(intent);
                         });
-                    }else if(nbPlaces <= 0 || nbInscription() >= 2){
-                        b.setOnClickListener(null);
+
+
+                    }else if (nbPlaces <=0){
+                        b.setOnClickListener(v -> {
+                            Toast.makeText(getApplicationContext(),"Crénau plein",Toast.LENGTH_SHORT).show();
+                        });
+
+                    }else if(nbInscription() >= 1) {
+                        b.setOnClickListener(v -> {
+                            Toast.makeText(getApplicationContext(),"Tu es déjà inscrit cette semaine",Toast.LENGTH_SHORT).show();
+                        });
+
+
+
+
                     }else{
                         b.setOnClickListener(v -> {
                             Intent intent = new Intent(Midi.this, DemandeMidi.class);

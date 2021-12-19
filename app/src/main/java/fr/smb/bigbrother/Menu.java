@@ -5,8 +5,6 @@ import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-import fr.smb.bigbrother.R;
-
 public class Menu extends AppCompatActivity {
 
     @Override

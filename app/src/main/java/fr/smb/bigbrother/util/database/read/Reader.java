@@ -16,7 +16,7 @@ import fr.smb.bigbrother.util.database.read.type.value;
 
 public class Reader {
 
-    static ArrayList<Reader> list = new ArrayList<Reader>();
+    static ArrayList<Reader> list = new ArrayList<>();
 
     private DatabaseEvent dataEvent;
 
