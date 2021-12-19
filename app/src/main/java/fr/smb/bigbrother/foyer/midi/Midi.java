@@ -88,10 +88,10 @@ public class Midi  extends AppCompatActivity {
                     int nbPlaces = maxPlaces - out.getInt("count");
                             String text;
                             if (nbPlaces == 0){
-                                 text = nbPlaces + "/"+ maxPlaces + " créneau plein ";
+                                 text = nbPlaces + " créneau plein ";
                             }else {
 
-                                text = nbPlaces + "/" + maxPlaces + " places restantes";
+                                text = nbPlaces + " places restantes";
                             }
 
                     boolean contain = out.getBoolean("contain");
