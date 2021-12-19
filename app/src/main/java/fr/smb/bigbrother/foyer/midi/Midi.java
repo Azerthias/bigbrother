@@ -127,7 +127,7 @@ public class Midi  extends AppCompatActivity {
 
 
                     }else if (nbPlaces <=0){
-                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Crénau plein",Toast.LENGTH_SHORT).show());
+                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Ce créneau plein",Toast.LENGTH_SHORT).show());
 
                     }else if(nbInscription() >= 1) {
                         b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Tu es déjà inscrit cette semaine",Toast.LENGTH_SHORT).show());
