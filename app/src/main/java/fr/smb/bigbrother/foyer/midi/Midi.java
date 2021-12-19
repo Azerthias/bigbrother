@@ -136,8 +136,6 @@ public class Midi  extends AppCompatActivity {
                 }
             }
         }
-        Util.print("nb : " + nb);
-        Util.print("tab : " + Arrays.deepToString(inscrit));
         return nb;
     }
 
