@@ -31,13 +31,20 @@ public class Reader {
         new count(path, key, out , this);
     }
 
-    public void addValue(String path, String key){
-        new value(path, key, out , this);
+
+    public void addIntValue(String path, String key){
+        new value(path, key, out , this, value.INT);
     }
 
-    public void addText(String path, String key){
-        new value(path, key, out , this);
+    public void addBooleanValue(String path, String key){
+        new value(path, key, out , this, value.BOOLEAN);
     }
+
+    public void addStringValue(String path, String key){
+        new value(path, key, out , this, value.STRING);
+    }
+
+
 
     public void addTest(String path, String key, String value){
         new contain(path, key, value, out , this);

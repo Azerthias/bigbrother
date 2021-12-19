@@ -2,10 +2,12 @@ package fr.smb.bigbrother.foyer.midi;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -53,7 +55,6 @@ public class Midi  extends AppCompatActivity {
             if(i == 2){i++;}
             final int jour = i;
             final int jv = jour>2?jour-1:jour;
-            Util.print("jv : " + jv);
 
             LinearLayout ll2 = new LinearLayout(this);
             ll2.setOrientation(LinearLayout.HORIZONTAL);
@@ -86,19 +87,20 @@ public class Midi  extends AppCompatActivity {
                 r.setEvent(out -> {
                     int maxPlaces = out.getInt("value");
                     int nbPlaces = maxPlaces - out.getInt("count");
-                            String text;
-                            if (nbPlaces == 0){
-                                 text = nbPlaces + " créneau plein ";
-                            }else {
+                    String text;
+                    if (nbPlaces == 0){
+                        text = nbPlaces + " créneau plein ";
+                    }else {
 
-                                text = nbPlaces + " places restantes";
-                            }
+                        text = nbPlaces + " places restantes";
+                    }
 
                     boolean contain = out.getBoolean("contain");
                     b.setText(text);
                     if(contain){
                         inscrit[jv][hv] = true;
                         SpannableString str = new SpannableString("inscrit\n\n"+text);
+                        str.setSpan(new StyleSpan(Typeface.BOLD), 0, 7, 0);
                         str.setSpan(new UnderlineSpan(), 0, 7, 0);
                         str.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.purple_500)), 0, 7, 0);
 
@@ -109,15 +111,18 @@ public class Midi  extends AppCompatActivity {
 
                     }
 
-                    if(nbPlaces <= 0){
+                    if(!out.getBoolean("ouvert")){
+                        b.setBackgroundColor(Color.DKGRAY);
+                    }else if(nbPlaces <= 0){
                         b.setBackgroundColor(Color.RED);
                     }else if(nbPlaces <= 10){
                         b.setBackgroundColor(Color.parseColor("#ff9900"));
                     }else{
                         b.setBackgroundColor(Color.parseColor("#33cc33"));
                     }
-
-                    if(contain){
+                    if(!out.getBoolean("ouvert")){
+                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Crénau fermée",Toast.LENGTH_SHORT).show());
+                    }else if(contain){
                         b.setOnClickListener(v -> {
                             Intent intent = new Intent(Midi.this, RemoveMidi.class);
                             intent.putExtra("h", heure);
@@ -145,11 +150,12 @@ public class Midi  extends AppCompatActivity {
                     }
 
 
+
                 });
-                r.addValue(path + "/places","value");
+                r.addIntValue(path + "/places","value");
                 r.addCount(path + "/demandes","count");
                 r.addTest(path + "/demandes","contain" , "" + Cache.getCard());
-
+                r.addBooleanValue(path + "/ouvert","ouvert");
                 ll2.addView(b);
             }
 
