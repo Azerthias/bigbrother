@@ -90,13 +90,15 @@ public class Midi  extends AppCompatActivity {
 
                     }else{
                         inscrit[jv][hv] = false;
-                        if(nbPlaces <= 0){
-                            b.setBackgroundColor(Color.RED);
-                        }else if(nbPlaces <= 10){
-                            b.setBackgroundColor(Color.parseColor("#ff9900"));
-                        }else{
-                            b.setBackgroundColor(Color.parseColor("#33cc33"));
-                        }
+
+                    }
+
+                    if(nbPlaces <= 0){
+                        b.setBackgroundColor(Color.RED);
+                    }else if(nbPlaces <= 10){
+                        b.setBackgroundColor(Color.parseColor("#ff9900"));
+                    }else{
+                        b.setBackgroundColor(Color.parseColor("#33cc33"));
                     }
 
                     if(contain){
