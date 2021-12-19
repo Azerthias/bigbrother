@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -79,13 +81,22 @@ public class Midi  extends AppCompatActivity {
                 r.setEvent(out -> {
                     int maxPlaces = out.getInt("value");
                     int nbPlaces = maxPlaces - out.getInt("count");
-                    String text = "il reste " + nbPlaces + " places sur " + maxPlaces;
+                            String text;
+                            if (nbPlaces == 0){
+                                 text = nbPlaces + "/"+ maxPlaces + " créneau plein ";
+                            }else {
+
+                                text = nbPlaces + "/" + maxPlaces + " places restantes";
+                            }
+
                     boolean contain = out.getBoolean("contain");
                     b.setText(text);
                     if(contain){
                         inscrit[jv][hv] = true;
                         SpannableString str = new SpannableString("inscrit\n\n"+text);
-                        str.setSpan(new BackgroundColorSpan(Color.RED), 0, 7, 0);
+                        str.setSpan(new UnderlineSpan(), 0, 7, 0);
+                        str.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.purple_500)), 0, 7, 0);
+
                         b.setText(str);
 
                     }else{
