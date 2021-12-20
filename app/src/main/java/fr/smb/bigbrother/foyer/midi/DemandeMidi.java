@@ -31,7 +31,7 @@ public class DemandeMidi extends AppCompatActivity {
         r.setEvent(out -> {
             int maxPlaces = out.getInt("value");
             int nbPlaces = maxPlaces - out.getInt("count");
-            String text = "Manger foyer " + Util.jours[j] + " de " + h + "h à " + (h + 1) + "h\nIl reste " + nbPlaces + " places sur " + maxPlaces;
+            String text = "Veux-tu t'inscrire pour manger au foyer " + Util.jours[j] + " de " + h + "h à " + (h + 1) + "h ?\n\nIl reste " + nbPlaces + " place(s)" ;
             tv.setText(text);
 
 

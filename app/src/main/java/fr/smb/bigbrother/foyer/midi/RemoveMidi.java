@@ -26,7 +26,7 @@ public class RemoveMidi extends AppCompatActivity {
 
         TextView tv = findViewById(R.id.tvDemande);
         final String path = Util.dayPath(j, h) + "/places";
-        final String text = "Retirer manger au foyer " + Util.jours[j] + " de " + h + "h à " + (h + 1) + "h";
+        final String text = "Veux-tu te désinscrire " + Util.jours[j] + " de " + h + "h à " + (h + 1) + "h ?";
         Reader.readOnTv(path,tv,text);
 
         Button b = findViewById(R.id.bOui);
