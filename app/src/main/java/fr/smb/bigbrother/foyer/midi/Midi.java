@@ -31,7 +31,7 @@ public class Midi  extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.midi);
 
-        Util.setTitle(this,"Manger au Foyer");
+        Util.setTitle(this,"Manger au foyer");
 
 
         LinearLayout ll = findViewById(R.id.llFoyerMidi);
@@ -61,7 +61,7 @@ public class Midi  extends AppCompatActivity {
             ll2.setWeightSum(1);
             ll2.setLayoutParams(param);
             if(Util.getDayNumber() == i){
-                ll2.setBackgroundColor(Color.BLUE);
+                ll2.setBackgroundColor(getResources().getColor(R.color.purple_500));
             }
 
             TextView tv = new TextView(this);
@@ -90,6 +90,8 @@ public class Midi  extends AppCompatActivity {
                     String text;
                     if (nbPlaces == 0){
                         text = "Créneau plein ";
+                    }else if (nbPlaces == 1){
+                        text = nbPlaces + " place restante";
                     }else {
 
                         text = nbPlaces + " places restantes";
@@ -121,7 +123,7 @@ public class Midi  extends AppCompatActivity {
                         b.setBackgroundColor(Color.parseColor("#33cc33"));
                     }
                     if(!out.getBoolean("ouvert")){
-                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Crénau fermée",Toast.LENGTH_SHORT).show());
+                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Créneau fermé",Toast.LENGTH_SHORT).show());
                     }else if(contain){
                         b.setOnClickListener(v -> {
                             Intent intent = new Intent(Midi.this, RemoveMidi.class);
@@ -132,7 +134,7 @@ public class Midi  extends AppCompatActivity {
 
 
                     }else if (nbPlaces <=0){
-                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Crénau plein",Toast.LENGTH_SHORT).show());
+                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Créneau plein",Toast.LENGTH_SHORT).show());
 
                     }else if(nbInscription() >= 1) {
                         b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Tu es déjà inscrit cette semaine",Toast.LENGTH_SHORT).show());

@@ -1,5 +1,6 @@
 package fr.smb.bigbrother.foyer.midi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
@@ -14,7 +15,11 @@ import java.util.Calendar;
 import java.util.Date;
 
 import fr.smb.bigbrother.R;
+import fr.smb.bigbrother.util.Cache;
 import fr.smb.bigbrother.util.Util;
+import fr.smb.bigbrother.util.database.read.DatabaseEvent;
+import fr.smb.bigbrother.util.database.read.Reader;
+import fr.smb.bigbrother.util.database.read.out;
 
 public class Pass extends AppCompatActivity {
 
@@ -25,6 +30,10 @@ public class Pass extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pass);
+
+        Intent intent = getIntent();
+        int h = intent.getIntExtra("h", 0);
+        int j = intent.getIntExtra("j", 0);
 
         Util.setTitle(this,"Pass");
 
@@ -42,6 +51,22 @@ public class Pass extends AppCompatActivity {
         }, 0);
 
         ImageView imageView = findViewById(R.id.ivPass);
-        Glide.with(this).load(R.drawable.pass).into(imageView);
+        Reader r = new Reader();
+        r.addTest(Util.dayPath(j,h) + "/demandes" ,"inscrit", ""+Cache.getCard());
+        r.setEvent(new DatabaseEvent() {
+            @Override
+            public void event(out out) {
+                if  (out.getBoolean("inscrit")) {
+                    Glide.with(Pass.this).load(R.drawable.pass).into(imageView);
+                }else{
+                    Glide.with(Pass.this).load(R.drawable.croix).into(imageView);
+                }
+
+
+            }
+        });
+
+
+
     }
 }
