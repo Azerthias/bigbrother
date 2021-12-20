@@ -72,6 +72,7 @@ public class Reader {
 
     public void addSynchronizer(Synchronizer s){
         sync = s;
+        isSync = true;
         s.add(this);
     }
 

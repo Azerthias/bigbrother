@@ -8,7 +8,7 @@ public class Synchronizer {
 
     public void update(){
         for(Reader r : list ){
-            r.update();
+            r.realUpdate();
         }
     }
 

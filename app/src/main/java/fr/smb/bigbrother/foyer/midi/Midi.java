@@ -20,6 +20,7 @@ import fr.smb.bigbrother.R;
 import fr.smb.bigbrother.util.Cache;
 import fr.smb.bigbrother.util.Util;
 import fr.smb.bigbrother.util.database.read.Reader;
+import fr.smb.bigbrother.util.database.read.Synchronizer;
 
 public class Midi  extends AppCompatActivity {
 
@@ -48,7 +49,7 @@ public class Midi  extends AppCompatActivity {
                 LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         param.weight = 0.5f;
         param.setMargins(10,10,10,10);
-
+        Synchronizer sync = new Synchronizer();
 
 
         for(int i = 0; i < 5; i++) {
@@ -160,6 +161,7 @@ public class Midi  extends AppCompatActivity {
                 r.addCount(path + "/demandes","count");
                 r.addTest(path + "/demandes","contain" , "" + Cache.getCard());
                 r.addBooleanValue(path + "/ouvert","ouvert");
+                r.addSynchronizer(sync);
                 ll2.addView(b);
             }
 
