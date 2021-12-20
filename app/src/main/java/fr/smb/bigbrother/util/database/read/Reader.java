@@ -61,11 +61,13 @@ public class Reader {
     }
 
     public void update(){
-        for(Reader r : list ){
+        /*for(Reader r : list ){
             r.repeater();
-        }
-        //dataEvent.event(out);
+        }*/
+        dataEvent.event(out);
     }
+
+
 
     public static void readOnTv(String path, TextView tv, String text){
 
