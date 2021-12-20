@@ -38,8 +38,10 @@ public class Midi  extends AppCompatActivity {
 
         Button pass = findViewById(R.id.bPass);
         pass.setOnClickListener(v -> {
-            Intent i = new Intent(Midi.this, Pass.class);
-            startActivity(i);
+            Intent intent = new Intent(Midi.this, Pass.class);
+            intent.putExtra("h", Util.getHour()+10);
+            intent.putExtra("j", Util.getDay());
+            startActivity(intent);
         });
 
         LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(

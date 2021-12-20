@@ -5,7 +5,10 @@ import android.util.Log;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import fr.smb.bigbrother.util.database.Database;
 
@@ -59,7 +62,27 @@ public class Util {
 
     public static int getHour(){
         Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdfo = new SimpleDateFormat("hh");
+        try {
+            Date DateReelle = sdfo.parse(String.valueOf(calendar.get(Calendar.HOUR)));
+            Date DateDebut = sdfo.parse("11");
+            Date Datemilieu = sdfo.parse("12");
+            Date DateFin = sdfo.parse("13");
 
+            if (DateReelle.before(DateDebut) || DateReelle.after(DateFin)) {
+                return 0;
+            }else if (DateReelle.before(Datemilieu)) {
+                return 1;
+            }else
+                return 2;
+
+
+
+
+
+        } catch (ParseException e) {
+
+        }
         return 11;
     }
 
