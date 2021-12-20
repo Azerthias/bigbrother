@@ -16,9 +16,11 @@ import fr.smb.bigbrother.util.database.read.type.value;
 
 public class Reader {
 
-    static ArrayList<Reader> list = new ArrayList<>();
+
 
     private DatabaseEvent dataEvent;
+    private boolean isSync = false;
+    private Synchronizer sync;
 
     private final out out;
 
@@ -52,19 +54,25 @@ public class Reader {
 
     public void setEvent(DatabaseEvent de){
         dataEvent = de;
-        list.add(this);
         update();
     }
 
-    public void repeater(){
+    public void update(){
+        if(isSync){
+            sync.update();
+        }else{
+            realUpdate();
+        }
+
+    }
+
+    public void realUpdate(){
         dataEvent.event(out);
     }
 
-    public void update(){
-        /*for(Reader r : list ){
-            r.repeater();
-        }*/
-        dataEvent.event(out);
+    public void addSynchronizer(Synchronizer s){
+        sync = s;
+        s.add(this);
     }
 
 

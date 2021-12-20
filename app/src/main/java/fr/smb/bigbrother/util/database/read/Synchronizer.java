@@ -1,7 +1,18 @@
 package fr.smb.bigbrother.util.database.read;
 
-public class Synchronizer {
-    public Synchronizer(){
+import java.util.ArrayList;
 
+public class Synchronizer {
+
+    static ArrayList<Reader> list = new ArrayList<>();
+
+    public void update(){
+        for(Reader r : list ){
+            r.update();
+        }
+    }
+
+    public void add(Reader r){
+        list.add(r);
     }
 }
