@@ -58,6 +58,7 @@ public class Util {
     }
 
     public static int getHour(){
+        Calendar calendar = Calendar.getInstance();
 
         return 11;
     }
