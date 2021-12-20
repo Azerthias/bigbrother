@@ -6,7 +6,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import fr.smb.bigbrother.util.Util;
 import fr.smb.bigbrother.util.database.Database;
 import fr.smb.bigbrother.util.database.read.Reader;
 import fr.smb.bigbrother.util.database.read.out;
@@ -30,39 +29,43 @@ public class value{
                 out.addString(key,null);
                 break;
         }
+        try {
+            Database.getReference(path).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    try {
+                        switch (type) {
+                            case INT:
+                                out.updateInt(key, dataSnapshot.getValue(int.class));
+                                break;
+                            case BOOLEAN:
+                                if (dataSnapshot.getValue().toString().equals("true")) {
+                                    out.updateBoolean(key, true);
+                                } else {
+                                    out.updateBoolean(key, false);
+                                }
 
-        Database.getReference(path).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                try {
-                    switch (type){
-                        case INT:
-                            out.updateInt(key, dataSnapshot.getValue(int.class));
-                            break;
-                        case BOOLEAN:
-                            if(dataSnapshot.getValue().toString().equals("true")){
-                                out.updateBoolean(key, true);
-                            }else{
-                                out.updateBoolean(key, false);
-                            }
+                                break;
+                            case STRING:
 
-                            break;
-                        case STRING:
+                                out.updateString(key, dataSnapshot.getValue().toString());
 
-                            out.updateString(key, dataSnapshot.getValue().toString());
+                                break;
+                        }
 
-                            break;
+
+                        r.update();
+                    } catch (Exception ignored) {
                     }
+                }
 
+                @Override
+                public void onCancelled(DatabaseError error) {
+                    Log.w("TAG", "Failed to read value.", error.toException());
+                }
+            });
+        }catch (NullPointerException ignored){
 
-                    r.update();
-                }catch(Exception ignored){}
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                Log.w("TAG", "Failed to read value.", error.toException());
-            }
-        });
+        }
     }
 }

@@ -34,6 +34,7 @@ public class Pass extends AppCompatActivity {
         Intent intent = getIntent();
         int h = intent.getIntExtra("h", 0);
         int j = intent.getIntExtra("j", 0);
+        Util.print("h : " + h);
 
         Util.setTitle(this,"Pass");
 
