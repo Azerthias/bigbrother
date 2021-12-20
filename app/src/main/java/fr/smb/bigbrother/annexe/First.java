@@ -10,14 +10,24 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import fr.smb.bigbrother.MainActivity;
 import fr.smb.bigbrother.R;
 
 public class First extends AppCompatActivity {
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.first);
+
+
+
+        /*setContentView(R.layout.first);
 
         Button b = findViewById(R.id.bAuthValider);
         b.setOnClickListener(new View.OnClickListener() {
@@ -40,6 +50,6 @@ public class First extends AppCompatActivity {
                 startActivity(i);
                 finish();
             }
-        });
+        });*/
     }
 }

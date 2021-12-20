@@ -31,19 +31,15 @@ public class Pass extends AppCompatActivity {
         TextView tv = findViewById(R.id.tvPass);
 
         Handler handler = new Handler();
-
-
-
-        int delay = 1000;
         handler.postDelayed(runnable = new Runnable() {
             public void run() {
-                handler.postDelayed(runnable, delay);
+                handler.postDelayed(runnable, 1000);
                 Date dt = new Date();
                 SimpleDateFormat dateFormat;
                 dateFormat = new SimpleDateFormat("dd/MM\nkk:mm:ss");
                 tv.setText(dateFormat.format(dt));
             }
-        }, delay);
+        }, 0);
 
         ImageView imageView = findViewById(R.id.ivPass);
         Glide.with(this).load(R.drawable.pass).into(imageView);

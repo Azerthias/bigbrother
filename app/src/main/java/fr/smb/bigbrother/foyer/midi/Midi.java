@@ -89,7 +89,7 @@ public class Midi  extends AppCompatActivity {
                     int nbPlaces = maxPlaces - out.getInt("count");
                     String text;
                     if (nbPlaces == 0){
-                        text = nbPlaces + " créneau plein ";
+                        text = "Créneau plein ";
                     }else {
 
                         text = nbPlaces + " places restantes";

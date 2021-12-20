@@ -35,7 +35,7 @@ public class Util {
 
     public static int getWeekNumber(){
         Calendar calendar = Calendar.getInstance();
-        return calendar.get(Calendar.WEEK_OF_YEAR) - 2;
+        return calendar.get(Calendar.WEEK_OF_YEAR) - 1;
     }
 
     public static int getDayNumber(){
