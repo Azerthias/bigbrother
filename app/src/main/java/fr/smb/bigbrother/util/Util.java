@@ -62,16 +62,16 @@ public class Util {
 
     public static int getHour(){
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdfo = new SimpleDateFormat("hh");
+        SimpleDateFormat sdfo = new SimpleDateFormat("hh-mm");
         try {
-            Date DateReelle = sdfo.parse(String.valueOf(calendar.get(Calendar.HOUR)));
-            Date DateDebut = sdfo.parse("11");
-            Date Datemilieu = sdfo.parse("12");
-            Date DateFin = sdfo.parse("13");
+            Date DateReelle = sdfo.parse(String.valueOf(calendar.get(Calendar.HOUR))+"-"+ String.valueOf(calendar.get(Calendar.MINUTE)));
+            Date DateDebut = sdfo.parse("10-55");
+            Date DateMilieu = sdfo.parse("11-54");
+            Date DateFin = sdfo.parse("13-14");
 
             if (DateReelle.before(DateDebut) || DateReelle.after(DateFin)) {
                 return 0;
-            }else if (DateReelle.before(Datemilieu)) {
+            }else if (DateReelle.before(DateMilieu)) {
                 return 1;
             }else
                 return 2;
