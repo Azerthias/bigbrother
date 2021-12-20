@@ -57,8 +57,12 @@ public class Util {
         return jours[getDayNumber()];
     }
 
+    public static int dayNumber(int day){
+        return day>2?day-1:day;
+    }
+
     public static String dayPath(int day, int h){
-        return "foyer/midi/semaines/semaine" + Util.getWeekNumber() + "/" + Util.jours[day] + "/" + h + "h";
+        return "foyer/midi/semaines/semaine" + Util.getWeekNumber() + "/" + dayNumber(day) + Util.jours[day] + "/" + h + "h";
     }
 
 
