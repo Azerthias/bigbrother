@@ -23,7 +23,7 @@ public class Demande extends AppCompatActivity {
         int h = intent.getIntExtra("h",0);
 
         TextView tv = findViewById(R.id.tvDemande);
-        tv.setText("Demander à aller au foyer de " + (h+8) + "h à " + (h+9) +"h");
+        tv.setText("Souhaites-tu aller au foyer de " + (h+8) + "h à " + (h+9) +"h ?");
 
         Button b = findViewById(R.id.bOui);
         b.setOnClickListener(new View.OnClickListener() {
