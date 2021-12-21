@@ -42,7 +42,7 @@ public class Midi  extends AppCompatActivity {
         pass.setOnClickListener(v -> {
             Intent intent = new Intent(Midi.this, Pass.class);
             intent.putExtra("h", Util.getHour()+10);
-            intent.putExtra("j", Util.getDay());
+            intent.putExtra("j", Util.getDayNumber());
             startActivity(intent);
         });
 
@@ -178,7 +178,6 @@ public class Midi  extends AppCompatActivity {
                     inscriptions++;
                 }
             }
-            Util.print("" + inscriptions);
         });
 
     }

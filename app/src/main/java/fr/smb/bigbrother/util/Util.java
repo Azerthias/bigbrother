@@ -61,14 +61,12 @@ public class Util {
     }
 
     public static int getHour(){
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdfo = new SimpleDateFormat("hh-mm");
+        SimpleDateFormat sdfo = new SimpleDateFormat("HH-mm");
         try {
-            Date DateReelle = sdfo.parse(String.valueOf(calendar.get(Calendar.HOUR))+"-"+ String.valueOf(calendar.get(Calendar.MINUTE)));
+            Date DateReelle = sdfo.parse(sdfo.format(new Date()));
             Date DateDebut = sdfo.parse("10-55");
             Date DateMilieu = sdfo.parse("11-54");
             Date DateFin = sdfo.parse("13-14");
-
             if (DateReelle.before(DateDebut) || DateReelle.after(DateFin)) {
                 return 0;
             }else if (DateReelle.before(DateMilieu)) {

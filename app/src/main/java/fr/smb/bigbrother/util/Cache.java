@@ -9,6 +9,8 @@ public class Cache {
     static SharedPreferences preferences;
     static AppCompatActivity app;
 
+    static int card;
+
     public static void init(AppCompatActivity a){
         app = a;
         preferences = app.getSharedPreferences("prefData", Context.MODE_PRIVATE);
@@ -26,8 +28,11 @@ public class Cache {
     }
 
     public static int getCard(){
-        update();
-        return preferences.getInt("tag",0);
+        if(preferences != null){
+            card =preferences.getInt("tag", 0);
+        }
+        return card;
+
     }
 
     public static boolean isLogged(){

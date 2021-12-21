@@ -54,6 +54,7 @@ n = name;
 
     public void setEvent(DatabaseEvent de){
         dataEvent = de;
+        realUpdate();
     }
 
     public void update(){
@@ -67,7 +68,9 @@ n = name;
     }
 
     public void realUpdate(){
-        dataEvent.event(out);
+        try {
+            dataEvent.event(out);
+        }catch(Exception ignored){}
     }
 
     public void addSynchronizer(Synchronizer s){

@@ -15,38 +15,40 @@ public class contain {
 
     public contain(String path, String key, String value, out out, Reader r){
         out.addBoolean(key, false);
-        Database.getReference(path).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(snapshot.getKey().hashCode() == value.hashCode()){
-                    out.updateBoolean(key, true);
-                    r.update();
+        try {
+            Database.getReference(path).addChildEventListener(new ChildEventListener() {
+                @Override
+                public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                    if (snapshot.getKey().hashCode() == value.hashCode()) {
+                        out.updateBoolean(key, true);
+                        r.update();
+                    }
+
                 }
 
-            }
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot snapshot) {
-                if(snapshot.getKey().hashCode() == value.hashCode()){
-                    out.updateBoolean(key, false);
-                    r.update();
                 }
-            }
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+                    if (snapshot.getKey().hashCode() == value.hashCode()) {
+                        out.updateBoolean(key, false);
+                        r.update();
+                    }
+                }
 
-            }
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                }
 
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }catch (NullPointerException ignored){}
     }
 }
