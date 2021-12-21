@@ -5,7 +5,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.SpannableString;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
@@ -16,6 +15,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Arrays;
+
 import fr.smb.bigbrother.R;
 import fr.smb.bigbrother.util.Cache;
 import fr.smb.bigbrother.util.Util;
@@ -24,7 +25,7 @@ import fr.smb.bigbrother.util.database.read.Synchronizer;
 
 public class Midi  extends AppCompatActivity {
 
-    static boolean[][] inscrit = new boolean[4][2];
+    static int inscriptions = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +51,10 @@ public class Midi  extends AppCompatActivity {
         param.weight = 0.5f;
         param.setMargins(10,10,10,10);
         Synchronizer sync = new Synchronizer();
+
+        Reader read = new Reader("principal");
+        read.addSynchronizer(sync);
+        int num = 0;
 
 
         for(int i = 0; i < 5; i++) {
@@ -86,7 +91,7 @@ public class Midi  extends AppCompatActivity {
                 b.setLayoutParams(param);
                 b.setTextSize(20);
 
-                Reader r = new Reader();
+                Reader r = new Reader(Util.jours[jour] + " -> " + heure + "h");
                 r.setEvent(out -> {
                     int maxPlaces = out.getInt("value");
                     int nbPlaces = maxPlaces - out.getInt("count");
@@ -103,17 +108,12 @@ public class Midi  extends AppCompatActivity {
                     boolean contain = out.getBoolean("contain");
                     b.setText(text);
                     if(contain){
-                        inscrit[jv][hv] = true;
                         SpannableString str = new SpannableString("inscrit\n\n"+text);
                         str.setSpan(new StyleSpan(Typeface.BOLD), 0, 7, 0);
                         str.setSpan(new UnderlineSpan(), 0, 7, 0);
                         str.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.purple_500)), 0, 7, 0);
 
                         b.setText(str);
-
-                    }else{
-                        inscrit[jv][hv] = false;
-
                     }
 
                     if(!out.getBoolean("ouvert")){
@@ -139,7 +139,7 @@ public class Midi  extends AppCompatActivity {
                     }else if (nbPlaces <=0){
                         b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Créneau plein",Toast.LENGTH_SHORT).show());
 
-                    }else if(nbInscription() >= 1) {
+                    }else if(inscriptions >= 1) {
                         b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Tu es déjà inscrit cette semaine",Toast.LENGTH_SHORT).show());
 
 
@@ -155,7 +155,6 @@ public class Midi  extends AppCompatActivity {
                     }
 
 
-
                 });
                 r.addIntValue(path + "/places","value");
                 r.addCount(path + "/demandes","count");
@@ -163,25 +162,27 @@ public class Midi  extends AppCompatActivity {
                 r.addBooleanValue(path + "/ouvert","ouvert");
                 r.addSynchronizer(sync);
                 ll2.addView(b);
+
+                read.addTest(path + "/demandes","contain" + num , "" + Cache.getCard());
+                num++;
             }
 
 
             ll.addView(ll2,ll.getChildCount() - 1);
         }
 
-    }
-
-    private static int nbInscription(){
-        int nb = 0;
-        for(boolean[] b : inscrit){
-            for(boolean b2 : b){
-                if(b2){
-                    nb++;
+        read.setEvent(out -> {
+            inscriptions = 0;
+            for(int i = 0; i < 8; i++){
+                if(out.getBoolean("contain" + i)){
+                    inscriptions++;
                 }
             }
-        }
-        return nb;
+            Util.print("" + inscriptions);
+        });
+
     }
+
 
 
 }

@@ -7,8 +7,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-
 import fr.smb.bigbrother.util.database.Database;
 import fr.smb.bigbrother.util.database.read.type.contain;
 import fr.smb.bigbrother.util.database.read.type.count;
@@ -24,9 +22,11 @@ public class Reader {
 
     private final out out;
 
-    public Reader(){
-        out = new out();
+    String n;
 
+    public Reader(String name){
+        out = new out();
+n = name;
     }
 
     public void addCount(String path, String key){
@@ -54,12 +54,12 @@ public class Reader {
 
     public void setEvent(DatabaseEvent de){
         dataEvent = de;
-        update();
     }
 
     public void update(){
         if(isSync){
             sync.update();
+
         }else{
             realUpdate();
         }
@@ -99,9 +99,6 @@ public class Reader {
         });
 
     }
-
-
-
 
 
 }

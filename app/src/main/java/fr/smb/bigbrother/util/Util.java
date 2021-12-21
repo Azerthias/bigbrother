@@ -80,9 +80,7 @@ public class Util {
 
 
 
-        } catch (ParseException e) {
-
-        }
+        } catch (ParseException ignored) {}
         return 11;
     }
 

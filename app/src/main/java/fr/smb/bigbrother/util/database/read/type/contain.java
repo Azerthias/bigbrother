@@ -7,7 +7,6 @@ import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 
-import fr.smb.bigbrother.util.Util;
 import fr.smb.bigbrother.util.database.Database;
 import fr.smb.bigbrother.util.database.read.Reader;
 import fr.smb.bigbrother.util.database.read.out;

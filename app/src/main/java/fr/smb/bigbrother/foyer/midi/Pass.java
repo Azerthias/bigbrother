@@ -11,15 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.bumptech.glide.Glide;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import fr.smb.bigbrother.R;
 import fr.smb.bigbrother.util.Cache;
 import fr.smb.bigbrother.util.Util;
-import fr.smb.bigbrother.util.database.read.DatabaseEvent;
 import fr.smb.bigbrother.util.database.read.Reader;
-import fr.smb.bigbrother.util.database.read.out;
 
 public class Pass extends AppCompatActivity {
 
@@ -41,30 +38,25 @@ public class Pass extends AppCompatActivity {
         TextView tv = findViewById(R.id.tvPass);
 
         Handler handler = new Handler();
-        handler.postDelayed(runnable = new Runnable() {
-            public void run() {
-                handler.postDelayed(runnable, 1000);
-                Date dt = new Date();
-                SimpleDateFormat dateFormat;
-                dateFormat = new SimpleDateFormat("dd/MM\nkk:mm:ss");
-                tv.setText(dateFormat.format(dt));
-            }
+        handler.postDelayed(runnable = () -> {
+            handler.postDelayed(runnable, 1000);
+            Date dt = new Date();
+            SimpleDateFormat dateFormat;
+            dateFormat = new SimpleDateFormat("dd/MM\nkk:mm:ss");
+            tv.setText(dateFormat.format(dt));
         }, 0);
 
         ImageView imageView = findViewById(R.id.ivPass);
-        Reader r = new Reader();
+        Reader r = new Reader("pass");
         r.addTest(Util.dayPath(j,h) + "/demandes" ,"inscrit", ""+Cache.getCard());
-        r.setEvent(new DatabaseEvent() {
-            @Override
-            public void event(out out) {
-                if  (out.getBoolean("inscrit")) {
-                    Glide.with(Pass.this).load(R.drawable.pass).into(imageView);
-                }else{
-                    Glide.with(Pass.this).load(R.drawable.croix).into(imageView);
-                }
-
-
+        r.setEvent(out -> {
+            if  (out.getBoolean("inscrit")) {
+                Glide.with(Pass.this).load(R.drawable.pass).into(imageView);
+            }else{
+                Glide.with(Pass.this).load(R.drawable.croix).into(imageView);
             }
+
+
         });
 
 

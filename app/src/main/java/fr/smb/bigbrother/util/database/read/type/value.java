@@ -2,6 +2,8 @@ package fr.smb.bigbrother.util.database.read.type;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
@@ -32,18 +34,14 @@ public class value{
         try {
             Database.getReference(path).addValueEventListener(new ValueEventListener() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     try {
                         switch (type) {
                             case INT:
                                 out.updateInt(key, dataSnapshot.getValue(int.class));
                                 break;
                             case BOOLEAN:
-                                if (dataSnapshot.getValue().toString().equals("true")) {
-                                    out.updateBoolean(key, true);
-                                } else {
-                                    out.updateBoolean(key, false);
-                                }
+                                out.updateBoolean(key, dataSnapshot.getValue().toString().equals("true"));
 
                                 break;
                             case STRING:

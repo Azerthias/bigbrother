@@ -27,7 +27,7 @@ public class DemandeMidi extends AppCompatActivity {
         TextView tv = findViewById(R.id.tvDemande);
         final String path = Util.dayPath(j, h);
 
-        Reader r = new Reader();
+        Reader r = new Reader("demande midi");
         r.setEvent(out -> {
             int maxPlaces = out.getInt("value");
             int nbPlaces = maxPlaces - out.getInt("count");
