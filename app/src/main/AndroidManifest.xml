@@ -21,6 +21,7 @@
 
         </activity>
 
+        <activity android:name=".annexe.Authentification"/>
         <activity android:name=".Menu"/>
         <activity android:name=".MainActivity"/>
         <activity android:name=".foyer.perm.Foyer"/>

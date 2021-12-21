@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "498546882155-fhp8ttkj3a2r0mjae3vg5j4gd2q42t59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fr.smb.bigbrother",
+            "certificate_hash": "2ed24e6ff079f7919aa30989d1a0baa78dff09fb"
+          }
+        },
+        {
           "client_id": "498546882155-qvggscnvgaa5u856i0kh57o2duhf2epa.apps.googleusercontent.com",
           "client_type": 3
         }

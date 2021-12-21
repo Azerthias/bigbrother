@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 
 import fr.smb.bigbrother.MainActivity;
@@ -35,11 +37,21 @@ public class Start extends AppCompatActivity {
                 Log.println(Log.ASSERT, "g", "" + s);
                 Intent i;
                 if(s.equals(version)){
-                    if(!Cache.isLogged() || forceLoggin){
-                        i = new Intent(Start.this, First.class);
-                    }else {
-                        i = new Intent(Start.this, MainActivity.class);
+
+                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                    if(currentUser == null){
+                        Util.print("null");
+                        i = new Intent(Start.this, Authentification.class);
+                    }else if(!currentUser.getEmail().split("@")[1].equals("stemariebeaucamps.fr")){
+                        i = new Intent(Start.this, Authentification.class);
+                    }else{
+                        if(!Cache.isLogged() || forceLoggin){
+                            i = new Intent(Start.this, First.class);
+                        }else {
+                            i = new Intent(Start.this, MainActivity.class);
+                        }
                     }
+
 
                 }else{
 
