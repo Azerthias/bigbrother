@@ -23,6 +23,7 @@ public class Start extends AppCompatActivity {
     final static String version = "beta";
 
     final static boolean forceLoggin = false;
+    final static boolean forceAuth = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,7 @@ public class Start extends AppCompatActivity {
                 if(s.equals(version)){
 
                     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                    if(currentUser == null){
+                    if(currentUser == null || forceAuth){
                         Util.print("null");
                         i = new Intent(Start.this, Authentification.class);
                     }else if(!currentUser.getEmail().split("@")[1].equals("stemariebeaucamps.fr")){

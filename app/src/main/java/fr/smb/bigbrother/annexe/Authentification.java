@@ -29,8 +29,7 @@ import fr.smb.bigbrother.util.Util;
 public class Authentification extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, View.OnClickListener {
 
     SignInButton signInButton;
-    Button signOutButton;
-    TextView statusTextView;
+
     GoogleApiClient mGoogleApiClient;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
@@ -50,12 +49,10 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
 
 
 
-        statusTextView = findViewById(R.id.status_textview);
+
         signInButton = findViewById(R.id.signIn);
         signInButton.setOnClickListener(this);
 
-        signOutButton = findViewById(R.id.signOutButton);
-        signOutButton.setOnClickListener(this);
 
 
     }
@@ -64,14 +61,9 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.signIn:
+
                 SignIn();
-                break;
-            case R.id.signOutButton:
-                signOut();
-                break;
-        }
+
     }
 
     private void SignIn(){
@@ -94,9 +86,16 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
         Log.w(TAG,"handleSignInResult: " + result.isSuccess());
         if(result.isSuccess()){
             GoogleSignInAccount acct = result.getSignInAccount();
-            statusTextView.setText("hello, " + acct.getDisplayName());
-            Util.print("id : " + acct.getIdToken());
-            firebaseAuthWithGoogle(acct.getIdToken());
+            Util.print("email : " + acct.getEmail());
+
+            if(acct.getEmail().split("@")[1].equals("stemariebeucamps.fr")){
+                Util.print("val");
+                firebaseAuthWithGoogle(acct.getIdToken());
+            }else{
+                SignIn();
+            }
+
+
         }else{
 
         }
@@ -107,11 +106,9 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
         Log.w(TAG, "connection failed : " + connectionResult);
     }
 
-    private void signOut(){
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(status -> {
-            statusTextView.setText("signed out");
-        });
-    }
+
+        //Auth.GoogleSignInApi.signOut(mGoogleApiClient)
+
 
     private void firebaseAuthWithGoogle(String idToken) {
         FirebaseAuth mAuth;
@@ -124,8 +121,7 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
                     if (task.isSuccessful()) {
                         Log.d(TAG, "signInWithCredential:success");
                         FirebaseUser user = mAuth.getCurrentUser();
-                        statusTextView.setText(user.getEmail());
-                        Intent i = new Intent(Authentification.this, Start.class);
+                        Intent i = new Intent(Authentification.this, MainActivity.class);
                         startActivity(i);
                         finish();
                     } else {
