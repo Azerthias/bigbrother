@@ -24,6 +24,15 @@ import fr.smb.bigbrother.util.database.read.Synchronizer;
 public class Midi  extends AppCompatActivity {
 
     static int inscriptions = 0;
+    static final int FOYER_NON_PLANIFIE=0;
+    static final int FOYER_OUVERT=1;
+    static final int FOYER_FERME=2;
+    static final int FOYER_FERME_Inscr=3;
+    static final int FOYER_FERME_Inscr_Desinscr=4;
+    static final int FOYER_FERME_Desinscr=5;
+    static final int FOYER_VACANCES=6;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,12 +100,35 @@ public class Midi  extends AppCompatActivity {
                 r.setEvent(out -> {
                     int maxPlaces = out.getInt("value");
                     int nbPlaces = maxPlaces - out.getInt("count");
-                    boolean ouvert = out.getBoolean("ouvert");
+                    int ouvert = out.getInt("ouvert",0);
                     boolean contain = out.getBoolean("contain");
-                    String text;
-                    if(!ouvert){
-                        text = "Créneau fermé";
+                    String text = "error";
+                    if(ouvert != FOYER_OUVERT){
+                        switch(ouvert){
+                            case FOYER_NON_PLANIFIE:
+                                text = "Créneau pas encore planifié";
+                                break;
+                            case FOYER_FERME:
+                                text = "Fermé";
+                                break;
+                            case FOYER_FERME_Inscr:
+                                text = "Fermé aux inscriptions";
+                                break;
+                            case FOYER_FERME_Inscr_Desinscr:
+                                text = "Incriptions et désincriptions fermées";
+                                break;
+                            case FOYER_FERME_Desinscr:
+                                text = "Fermé aux désinscriptions";
+                                break;
+                            case FOYER_VACANCES:
+                                text = "Vacances";
+                                break;
+
+                        }
+
                         b.setBackgroundColor(Color.DKGRAY);
+                        final String textfinal = text;
+                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),textfinal,Toast.LENGTH_SHORT).show());
                     }else if (nbPlaces <= 0){
                         b.setBackgroundColor(Color.RED);
                         text = "Créneau plein";
@@ -113,8 +145,9 @@ public class Midi  extends AppCompatActivity {
                     }
                     b.setText(text);
 
-                    if(contain){
-                        SpannableString str = new SpannableString("inscrit\n"+text);
+                    if (ouvert!= FOYER_OUVERT) {
+                    } else if (contain) {
+                        SpannableString str = new SpannableString("inscrit\n" + text);
                         str.setSpan(new StyleSpan(Typeface.BOLD), 0, 7, 0);
                         str.setSpan(new UnderlineSpan(), 0, 7, 0);
                         str.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.purple_500)), 0, 7, 0);
@@ -123,9 +156,8 @@ public class Midi  extends AppCompatActivity {
                     }
 
 
-                    if(!ouvert){
-                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Créneau fermé",Toast.LENGTH_SHORT).show());
-                    }else if(contain){
+
+                     if(contain){
                         b.setOnClickListener(v -> {
                             Intent intent = new Intent(Midi.this, RemoveMidi.class);
                             intent.putExtra("h", heure);
@@ -155,7 +187,7 @@ public class Midi  extends AppCompatActivity {
                 r.addIntValue(path + "/places","value");
                 r.addCount(path + "/demandes","count");
                 r.addTest(path + "/demandes","contain" , Cache.getName());
-                r.addBooleanValue(path + "/ouvert","ouvert");
+                r.addIntValue(path + "/ouvert","ouvert");
                 r.addSynchronizer(sync);
                 ll2.addView(b);
 
