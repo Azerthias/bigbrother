@@ -16,7 +16,7 @@ public class Probleme extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.probleme);
 
-        Button bEnvoyer = findViewById(R.id.bEnvoyerSuggestion);
+        Button bEnvoyer = findViewById(R.id.bEnvoyerProbleme);
         bEnvoyer.setOnClickListener(v -> {
 
 
