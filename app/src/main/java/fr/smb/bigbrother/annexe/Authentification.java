@@ -124,6 +124,7 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
 
         }else{
             Util.print("email" , "error");
+            Util.print("email" , acct.getEmail());
         }
     }
 
