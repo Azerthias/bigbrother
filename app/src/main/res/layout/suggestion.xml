@@ -7,13 +7,13 @@
 
 
     <EditText
-        android:id="@+id/edProbleme"
+        android:id="@+id/edSuggestion"
         android:layout_width="match_parent"
         android:layout_height="206dp"
         android:hint="Ecrire votre suggestion ici" />
 
     <Button
-        android:id="@+id/bProbleme"
+        android:id="@+id/bEnvoyerSuggestion"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:text="Envoyer"

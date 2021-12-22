@@ -41,12 +41,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         });
 
-        Button bProbleme = findViewById(R.id.bProbleme);
+        Button bProbleme = findViewById(R.id.bEnvoyerSuggestion);
         bProbleme.setOnClickListener(v -> {
             Intent i = new Intent(MainActivity.this, Probleme.class);
             startActivity(i);
         });
-        Button bSuggestion = findViewById(R.id.bProbleme);
+        Button bSuggestion = findViewById(R.id.bEnvoyerSuggestion);
         bSuggestion.setOnClickListener(v -> {
             Intent i = new Intent(MainActivity.this, Suggestion.class);
             startActivity(i);

@@ -36,14 +36,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/bProbleme"
+            android:id="@+id/bEnvoyerSuggestion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"
             android:text="Signaler un problème" />
 
         <Button
-            android:id="@+id/bProbleme"
+            android:id="@+id/bEnvoyerSuggestion"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.5"

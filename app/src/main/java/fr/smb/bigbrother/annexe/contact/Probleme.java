@@ -1,6 +1,7 @@
 package fr.smb.bigbrother.annexe.contact;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,5 +15,11 @@ public class Probleme extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.probleme);
+
+        Button bEnvoyer = findViewById(R.id.bEnvoyerSuggestion);
+        bEnvoyer.setOnClickListener(v -> {
+
+
+        });
     }
 }
