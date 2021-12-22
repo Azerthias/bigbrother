@@ -19,15 +19,10 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.ResultCallback;
-import com.google.android.gms.common.api.Status;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
-
-import java.io.File;
-import java.text.ParseException;
 
 import fr.smb.bigbrother.MainActivity;
 import fr.smb.bigbrother.R;
@@ -127,6 +122,8 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
             Util.print("email" , acct.getEmail());
 
 
+        }else{
+            Util.print("email" , "error");
         }
     }
 
