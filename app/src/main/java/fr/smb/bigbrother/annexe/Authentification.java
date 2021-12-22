@@ -133,7 +133,7 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
     }
 
 
-        //Auth.GoogleSignInApi.signOut(mGoogleApiClient)
+    //Auth.GoogleSignInApi.signOut(mGoogleApiClient)
 
 
     private void firebaseAuthWithGoogle(String idToken, int tag) {
