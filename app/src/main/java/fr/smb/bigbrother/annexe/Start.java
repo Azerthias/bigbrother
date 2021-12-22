@@ -40,17 +40,12 @@ public class Start extends AppCompatActivity {
                 if(s.equals(version)){
 
                     FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                    if(currentUser == null || forceAuth){
+                    if(!Cache.isLogged() || currentUser == null || forceAuth || !currentUser.getEmail().split("@")[1].equals("stemariebeaucamps.fr")){
                         Util.print("null");
                         i = new Intent(Start.this, Authentification.class);
-                    }else if(!currentUser.getEmail().split("@")[1].equals("stemariebeaucamps.fr")){
-                        i = new Intent(Start.this, Authentification.class);
                     }else{
-                        if(!Cache.isLogged() || forceLoggin){
-                            i = new Intent(Start.this, First.class);
-                        }else {
-                            i = new Intent(Start.this, MainActivity.class);
-                        }
+                        i = new Intent(Start.this, MainActivity.class);
+
                     }
 
 

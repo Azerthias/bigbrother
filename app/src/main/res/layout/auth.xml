@@ -5,18 +5,62 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Mail beaucamps"
-        android:textAlignment="center"
-        android:textSize="40sp"
-        android:textStyle="bold" />
-
     <com.google.android.gms.common.SignInButton
         android:id="@+id/signIn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:text="mail beaucamp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="mail : "
+            android:textAlignment="textStart"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvMailAuth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="numero de la carte : "
+            android:textSize="20sp" />
+
+        <EditText
+            android:id="@+id/edAuth"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="numberDecimal" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvErrorAuth"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:textSize="20sp"
+        android:textStyle="italic" />
+
+    <Button
+        android:id="@+id/bAuthValider"
+        android:text="Valider"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
 
 
 </LinearLayout>

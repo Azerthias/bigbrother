@@ -30,7 +30,6 @@
         <activity android:name=".foyer.midi.DemandeMidi"/>
         <activity android:name=".foyer.midi.RemoveMidi"/>
         <activity android:name=".foyer.midi.Pass"/>
-        <activity android:name=".annexe.First"/>
         <activity android:name=".annexe.Maj"/>
 
     </application>
