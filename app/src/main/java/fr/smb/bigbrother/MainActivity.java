@@ -6,7 +6,8 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import fr.smb.bigbrother.annexe.Contact;
+import fr.smb.bigbrother.annexe.contact.Probleme;
+import fr.smb.bigbrother.annexe.contact.Suggestion;
 import fr.smb.bigbrother.foyer.midi.Midi;
 import fr.smb.bigbrother.foyer.perm.Foyer;
 import fr.smb.bigbrother.util.Util;
@@ -40,9 +41,14 @@ public class MainActivity extends AppCompatActivity {
             startActivity(i);
         });
 
-        Button bContact = findViewById(R.id.bProbleme);
-        bContact.setOnClickListener(v -> {
-            Intent i = new Intent(MainActivity.this, Contact.class);
+        Button bProbleme = findViewById(R.id.bProbleme);
+        bProbleme.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, Probleme.class);
+            startActivity(i);
+        });
+        Button bSuggestion = findViewById(R.id.bProbleme);
+        bSuggestion.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, Suggestion.class);
             startActivity(i);
         });
     }

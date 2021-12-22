@@ -43,10 +43,10 @@
             android:text="Signaler un problème" />
 
         <Button
-            android:id="@+id/bAmelioration"
+            android:id="@+id/bProbleme"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.5"
             android:text="Proposer une amélioration"
             tools:layout_weight="0.5" />
     </LinearLayout>
