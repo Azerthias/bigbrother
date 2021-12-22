@@ -89,7 +89,7 @@ public class Util {
 
 
     public static String dayPath(int day, int h){
-        return "foyer/midi/semaines/semaine" + Util.getWeekNumber() + "/" + (dayNumber(day)+1) + Util.jours[day] + "/" + h + "h";
+        return "foyer_midi/semaine" + Util.getWeekNumber() + "/" + (dayNumber(day)+1) + Util.jours[day] + "/" + h + "h";
     }
 
 

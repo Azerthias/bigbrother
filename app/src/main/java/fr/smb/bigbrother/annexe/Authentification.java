@@ -26,6 +26,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import java.io.File;
 import java.text.ParseException;
 
 import fr.smb.bigbrother.MainActivity;
@@ -123,7 +124,7 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
 
 
             tvMail.setText(acct.getEmail());
-            Util.print("email : " + acct.getEmail());
+            Util.print("email" , acct.getEmail());
 
 
         }

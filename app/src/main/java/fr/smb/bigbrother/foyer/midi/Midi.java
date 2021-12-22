@@ -15,8 +15,6 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.Arrays;
-
 import fr.smb.bigbrother.R;
 import fr.smb.bigbrother.util.Cache;
 import fr.smb.bigbrother.util.Util;
@@ -62,7 +60,6 @@ public class Midi  extends AppCompatActivity {
 
             if(i == 2){i++;}
             final int jour = i;
-            final int jv = jour>2?jour-1:jour;
 
             LinearLayout ll2 = new LinearLayout(this);
             ll2.setOrientation(LinearLayout.HORIZONTAL);
@@ -84,7 +81,6 @@ public class Midi  extends AppCompatActivity {
 
 
                 final int heure = h;
-                final int hv = heure - 11;
                 final String path = Util.dayPath(jour, heure);
 
                 Button b = new Button(this);
@@ -95,20 +91,30 @@ public class Midi  extends AppCompatActivity {
                 r.setEvent(out -> {
                     int maxPlaces = out.getInt("value");
                     int nbPlaces = maxPlaces - out.getInt("count");
-                    String text;
-                    if (nbPlaces == 0){
-                        text = "Créneau plein ";
-                    }else if (nbPlaces == 1){
-                        text = nbPlaces + " place restante";
-                    }else {
-
-                        text = nbPlaces + " places restantes";
-                    }
-
+                    boolean ouvert = out.getBoolean("ouvert");
                     boolean contain = out.getBoolean("contain");
+                    String text;
+                    if(!ouvert){
+                        text = "Créneau fermé";
+                        b.setBackgroundColor(Color.DKGRAY);
+                    }else if (nbPlaces <= 0){
+                        b.setBackgroundColor(Color.RED);
+                        text = "Créneau plein";
+                    }else if (nbPlaces == 1){
+                        text = "1 place restante";
+                        b.setBackgroundColor(Color.parseColor("#ff9900"));
+                    }else {
+                        text = nbPlaces + " places restantes";
+                        if(nbPlaces <= 10){
+                            b.setBackgroundColor(Color.parseColor("#ff9900"));
+                        }else{
+                            b.setBackgroundColor(Color.parseColor("#33cc33"));
+                        }
+                    }
                     b.setText(text);
+
                     if(contain){
-                        SpannableString str = new SpannableString("inscrit\n\n"+text);
+                        SpannableString str = new SpannableString("inscrit\n"+text);
                         str.setSpan(new StyleSpan(Typeface.BOLD), 0, 7, 0);
                         str.setSpan(new UnderlineSpan(), 0, 7, 0);
                         str.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.purple_500)), 0, 7, 0);
@@ -116,16 +122,8 @@ public class Midi  extends AppCompatActivity {
                         b.setText(str);
                     }
 
-                    if(!out.getBoolean("ouvert")){
-                        b.setBackgroundColor(Color.DKGRAY);
-                    }else if(nbPlaces <= 0){
-                        b.setBackgroundColor(Color.RED);
-                    }else if(nbPlaces <= 10){
-                        b.setBackgroundColor(Color.parseColor("#ff9900"));
-                    }else{
-                        b.setBackgroundColor(Color.parseColor("#33cc33"));
-                    }
-                    if(!out.getBoolean("ouvert")){
+
+                    if(!ouvert){
                         b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Créneau fermé",Toast.LENGTH_SHORT).show());
                     }else if(contain){
                         b.setOnClickListener(v -> {
@@ -142,9 +140,6 @@ public class Midi  extends AppCompatActivity {
                     }else if(inscriptions >= 1) {
                         b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),"Tu es déjà inscrit cette semaine",Toast.LENGTH_SHORT).show());
 
-
-
-
                     }else{
                         b.setOnClickListener(v -> {
                             Intent intent = new Intent(Midi.this, DemandeMidi.class);
@@ -156,14 +151,15 @@ public class Midi  extends AppCompatActivity {
 
 
                 });
+
                 r.addIntValue(path + "/places","value");
                 r.addCount(path + "/demandes","count");
-                r.addTest(path + "/demandes","contain" , "" + Cache.getCard());
+                r.addTest(path + "/demandes","contain" , Cache.getName());
                 r.addBooleanValue(path + "/ouvert","ouvert");
                 r.addSynchronizer(sync);
                 ll2.addView(b);
 
-                read.addTest(path + "/demandes","contain" + num , "" + Cache.getCard());
+                read.addTest(path + "/demandes","contain" + num , Cache.getName());
                 num++;
             }
 

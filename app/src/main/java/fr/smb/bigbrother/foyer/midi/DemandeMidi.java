@@ -42,7 +42,7 @@ public class DemandeMidi extends AppCompatActivity {
 
         Button b = findViewById(R.id.bOui);
         b.setOnClickListener(v -> {
-            Database.write(Util.dayPath(j, h)+ "/demandes/" + Cache.getCard(), Cache.getName());
+            Database.write(Util.dayPath(j, h)+ "/demandes/" + Cache.getName() + "/carte", Cache.getCard());
             finish();
         });
 

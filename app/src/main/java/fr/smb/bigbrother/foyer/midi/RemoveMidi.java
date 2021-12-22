@@ -31,7 +31,7 @@ public class RemoveMidi extends AppCompatActivity {
 
         Button b = findViewById(R.id.bOui);
         b.setOnClickListener(v -> {
-            Database.remove(Util.dayPath(j, h)+ "/demandes/" + Cache.getCard());
+            Database.remove(Util.dayPath(j, h)+ "/demandes/" + Cache.getName());
             finish();
         });
 
