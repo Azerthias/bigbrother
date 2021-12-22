@@ -1,10 +1,16 @@
 package fr.smb.bigbrother.annexe.contact;
 
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import fr.smb.bigbrother.R;
+import fr.smb.bigbrother.util.Cache;
+import fr.smb.bigbrother.util.Util;
+import fr.smb.bigbrother.util.database.Database;
 
 public class Suggestion extends AppCompatActivity {
 
@@ -14,5 +20,20 @@ public class Suggestion extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.suggestion);
+
+
+        EditText ed = findViewById(R.id.edSuggestion);
+        Button bEnvoyer = findViewById(R.id.bEnvoyerSuggestion);
+        bEnvoyer.setOnClickListener(v -> {
+            if (ed.getText().toString().length()!=0){
+                Database.write("suggestion/"+ Cache.getName()+"/"+ Util.getTime(),ed.getText().toString());
+                Toast.makeText(getApplicationContext(),"Envoyé",Toast.LENGTH_SHORT).show();
+                finish();
+
+
+
+
+            }
+        });
     }
 }
