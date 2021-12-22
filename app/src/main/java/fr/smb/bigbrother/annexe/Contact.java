@@ -1,4 +1,4 @@
-package fr.smb.bigbrother;
+package fr.smb.bigbrother.annexe;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,12 +6,14 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import fr.smb.bigbrother.annexe.Contact;
+import fr.smb.bigbrother.MainActivity;
+import fr.smb.bigbrother.Menu;
+import fr.smb.bigbrother.R;
 import fr.smb.bigbrother.foyer.midi.Midi;
 import fr.smb.bigbrother.foyer.perm.Foyer;
 import fr.smb.bigbrother.util.Util;
 
-public class MainActivity extends AppCompatActivity {
+public class Contact  extends AppCompatActivity {
 
 
     @Override

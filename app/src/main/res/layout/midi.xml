@@ -38,5 +38,25 @@
         android:layout_height="wrap_content"
         android:text="Pass" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/bSemainePre"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Semaine précédente" />
+
+        <Button
+            android:id="@+id/bSemaineSuiv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Semaine suivante" />
+    </LinearLayout>
+
 
 </LinearLayout>

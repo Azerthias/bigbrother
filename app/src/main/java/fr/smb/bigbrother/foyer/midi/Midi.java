@@ -102,52 +102,53 @@ public class Midi  extends AppCompatActivity {
                     int nbPlaces = maxPlaces - out.getInt("count");
                     int ouvert = out.getInt("ouvert",0);
                     boolean contain = out.getBoolean("contain");
-                    String text = "error";
+                    String textBouton = "error";
+
                     if(ouvert != FOYER_OUVERT){
                         switch(ouvert){
                             case FOYER_NON_PLANIFIE:
-                                text = "Créneau pas encore planifié";
+                                textBouton = "Créneau pas encore planifié";
                                 break;
                             case FOYER_FERME:
-                                text = "Fermé";
+                                textBouton = "Fermé";
                                 break;
                             case FOYER_FERME_Inscr:
-                                text = "Fermé aux inscriptions";
+                                textBouton = "Fermé aux inscriptions";
                                 break;
                             case FOYER_FERME_Inscr_Desinscr:
-                                text = "Incriptions et désincriptions fermées";
+                                textBouton = "Incriptions et désincriptions fermées";
                                 break;
                             case FOYER_FERME_Desinscr:
-                                text = "Fermé aux désinscriptions";
+                                textBouton = "Fermé aux désinscriptions";
                                 break;
                             case FOYER_VACANCES:
-                                text = "Vacances";
+                                textBouton = "Vacances";
                                 break;
 
                         }
 
+
                         b.setBackgroundColor(Color.DKGRAY);
-                        final String textfinal = text;
-                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),textfinal,Toast.LENGTH_SHORT).show());
                     }else if (nbPlaces <= 0){
                         b.setBackgroundColor(Color.RED);
-                        text = "Créneau plein";
+                        textBouton = "Créneau plein";
                     }else if (nbPlaces == 1){
-                        text = "1 place restante";
+                        textBouton = "1 place restante";
                         b.setBackgroundColor(Color.parseColor("#ff9900"));
                     }else {
-                        text = nbPlaces + " places restantes";
+                        textBouton = nbPlaces + " places restantes";
                         if(nbPlaces <= 10){
                             b.setBackgroundColor(Color.parseColor("#ff9900"));
                         }else{
                             b.setBackgroundColor(Color.parseColor("#33cc33"));
                         }
                     }
-                    b.setText(text);
+                    b.setText(textBouton);
 
-                    if (ouvert!= FOYER_OUVERT) {
-                    } else if (contain) {
-                        SpannableString str = new SpannableString("inscrit\n" + text);
+                    final String textToast = textBouton;
+
+                    if (contain) {
+                        SpannableString str = new SpannableString("inscrit\n" + textBouton);
                         str.setSpan(new StyleSpan(Typeface.BOLD), 0, 7, 0);
                         str.setSpan(new UnderlineSpan(), 0, 7, 0);
                         str.setSpan(new ForegroundColorSpan(getResources().getColor(R.color.purple_500)), 0, 7, 0);
@@ -156,8 +157,9 @@ public class Midi  extends AppCompatActivity {
                     }
 
 
-
-                     if(contain){
+                    if (ouvert!= FOYER_OUVERT) {
+                        b.setOnClickListener(v -> Toast.makeText(getApplicationContext(),textToast,Toast.LENGTH_SHORT).show());
+                    } else if(contain){
                         b.setOnClickListener(v -> {
                             Intent intent = new Intent(Midi.this, RemoveMidi.class);
                             intent.putExtra("h", heure);

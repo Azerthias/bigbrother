@@ -141,7 +141,6 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
         FirebaseAuth mAuth;
 
         mAuth = FirebaseAuth.getInstance();
-        //FirebaseUser currentUser = mAuth.getCurrentUser();
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
@@ -151,6 +150,7 @@ public class Authentification extends AppCompatActivity implements GoogleApiClie
                         SharedPreferences preferences = getSharedPreferences("prefData", Context.MODE_WORLD_WRITEABLE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("name",acct.getDisplayName());
+                        editor.putString("mail",acct.getEmail());
                         editor.putInt("tag",tag);
                         editor.putBoolean("logged" ,true);
                         editor.apply();
