@@ -27,9 +27,9 @@ public class Midi  extends AppCompatActivity {
     static final int FOYER_NON_PLANIFIE=0;
     static final int FOYER_OUVERT=1;
     static final int FOYER_FERME=2;
-    static final int FOYER_FERME_Inscr=3;
-    static final int FOYER_FERME_Inscr_Desinscr=4;
-    static final int FOYER_FERME_Desinscr=5;
+    static final int FOYER_OUVERT_Inscription=3;
+    static final int FOYER_OUVERT_Desinscription=4;
+    static final int FOYER_FERME_Inscription_Desinscription=5;
     static final int FOYER_VACANCES=6;
 
 
@@ -112,14 +112,14 @@ public class Midi  extends AppCompatActivity {
                             case FOYER_FERME:
                                 textBouton = "Fermé";
                                 break;
-                            case FOYER_FERME_Inscr:
+                            case FOYER_OUVERT_Inscription:
+                                textBouton = "Fermé aux désinscriptions";
+                                break;
+                            case FOYER_OUVERT_Desinscription:
                                 textBouton = "Fermé aux inscriptions";
                                 break;
-                            case FOYER_FERME_Inscr_Desinscr:
+                            case FOYER_FERME_Inscription_Desinscription:
                                 textBouton = "Incriptions et désincriptions fermées";
-                                break;
-                            case FOYER_FERME_Desinscr:
-                                textBouton = "Fermé aux désinscriptions";
                                 break;
                             case FOYER_VACANCES:
                                 textBouton = "Vacances";
